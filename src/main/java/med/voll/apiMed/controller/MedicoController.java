@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import med.voll.apiMed.medico.DadosCadastroMedico;
 import med.voll.apiMed.medico.Medico;
 import med.voll.apiMed.medico.MedicoRepository;
@@ -20,7 +21,7 @@ public class MedicoController {
 	
 	@PostMapping
 	@Transactional // transação ativa com BD
-	public void cadastrar(@RequestBody DadosCadastroMedico dados) {
+	public void cadastrar(@RequestBody @Valid DadosCadastroMedico dados) {
 		var medico = new Medico(dados);
 		repository.save(medico);
 	}
