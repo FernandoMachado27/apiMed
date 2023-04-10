@@ -30,10 +30,8 @@ public class Medico { // JPA
 	private String email;
 	private String telefone;
 	private String crm;
-	
 	@Enumerated(EnumType.STRING) // converter enum em String
 	private Especialidade especialidade;
-	
 	@Embedded // classe separadas mas salvos juntos na mesma tabela
 	private Endereco endereco;
 	

@@ -22,6 +22,6 @@ public record DadosCadastroMedico(
 		Especialidade especialidade,
 		@NotNull
 		@Valid // também validar dentro da classe abaixo
-		DadosEndereco endereco) { // DTO, model, transfere dados entre camadas
+		DadosEndereco endereco) { // DTO, model, transfere dados entre camadas, recebe e devolve(GET/SET)
 
 }
