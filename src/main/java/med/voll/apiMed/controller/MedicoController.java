@@ -7,11 +7,13 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
+import med.voll.apiMed.medico.DadosAtualizaçaoMedico;
 import med.voll.apiMed.medico.DadosCadastroMedico;
 import med.voll.apiMed.medico.DadosListagemMedico;
 import med.voll.apiMed.medico.Medico;
@@ -34,6 +36,13 @@ public class MedicoController {
 	@GetMapping
 	public Page<DadosListagemMedico> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao){ // criamos o DadosListagem para devolver apenas alguns atributos dos médicos
 		return repository.findAll(paginacao).map(DadosListagemMedico::new); // converter de medico p/ DadosListagem
+	}
+	
+	@PutMapping
+	@Transactional // JPA vai fazer o update sozinho 
+	public void atualizar(@RequestBody @Valid DadosAtualizaçaoMedico dados) {
+		var medico = repository.getReferenceById(dados.id()); // carrega o medico pelo id 
+		medico.atualizarInformacoes(dados); // passa novos dados para o medico
 	}
 
 }
