@@ -1,8 +1,8 @@
 package med.voll.apiMed.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,8 +31,8 @@ public class MedicoController {
 	}
 	
 	@GetMapping
-	public List<DadosListagemMedico> listar(){ // criamos o DadosListagem para devolver apenas alguns atributos dos médicos
-		return repository.findAll().stream().map(DadosListagemMedico::new).toList(); // converter de medico p/ DadosListagem
+	public Page<DadosListagemMedico> listar(Pageable paginacao){ // criamos o DadosListagem para devolver apenas alguns atributos dos médicos
+		return repository.findAll(paginacao).map(DadosListagemMedico::new); // converter de medico p/ DadosListagem
 	}
 
 }
