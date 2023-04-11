@@ -23,7 +23,7 @@ import med.voll.apiMed.endereco.Endereco;
 @AllArgsConstructor // construtor com todos campos
 @EqualsAndHashCode(of = "id") // equals e hashCode em cima do ID
 @Builder
-public class Medico { // JPA
+public class Medico { // JPA, entidade
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -35,8 +35,10 @@ public class Medico { // JPA
 	private Especialidade especialidade;
 	@Embedded // classe separadas mas salvos juntos na mesma tabela
 	private Endereco endereco;
+	private boolean ativo;
 	
 	public Medico(DadosCadastroMedico dados) { // contrutor com DTO
+		this.ativo = true;
 		this.nome = dados.nome();
 		this.email = dados.email();
 		this.telefone = dados.telefone();
@@ -57,5 +59,9 @@ public class Medico { // JPA
 		if (dados.endereco() != null) {
 			this.endereco.atualizarInformacoes(dados.endereco());
 		}
+	}
+
+	public void excluir() {
+		this.ativo = false;
 	}
 }
