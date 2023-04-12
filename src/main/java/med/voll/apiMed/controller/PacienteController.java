@@ -8,12 +8,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import jakarta.validation.Valid;
+import med.voll.apiMed.paciente.DadosAtualizacaoPaciente;
 import med.voll.apiMed.paciente.DadosCadastroPaciente;
 import med.voll.apiMed.paciente.DadosDetalhamentoPaciente;
 import med.voll.apiMed.paciente.DadosListagemPaciente;
@@ -43,6 +45,15 @@ public class PacienteController {
 		var page = repository.findAll(paginacao).map(DadosListagemPaciente::new);
 		
 		return ResponseEntity.ok(page);
+	}
+	
+	@PutMapping
+	@Transactional
+	public ResponseEntity atualizar(@RequestBody DadosAtualizacaoPaciente dados) {
+		var paciente = repository.getReferenceById(dados.id());
+		paciente.atualizarDados(dados);
+		
+		return ResponseEntity.ok(new DadosDetalhamentoPaciente(paciente));
 	}
 
 }
