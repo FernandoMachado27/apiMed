@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import jakarta.validation.Valid;
+import med.voll.apiMed.medico.DadosDetalhamentoMedico;
 import med.voll.apiMed.paciente.DadosAtualizacaoPaciente;
 import med.voll.apiMed.paciente.DadosCadastroPaciente;
 import med.voll.apiMed.paciente.DadosDetalhamentoPaciente;
@@ -65,6 +66,13 @@ public class PacienteController {
 		paciente.excuir();
 		
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping("/{id}") 
+	public ResponseEntity detalhar(@PathVariable Long id) {  
+		var paciente = repository.getReferenceById(id);
+		
+		return ResponseEntity.ok(new DadosDetalhamentoPaciente(paciente)); 
 	}
 
 }
