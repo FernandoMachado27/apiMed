@@ -59,4 +59,8 @@ public class Paciente {
 		}
 	}
 
+	public void excuir() {
+		this.ativo = false;
+	}
+
 }

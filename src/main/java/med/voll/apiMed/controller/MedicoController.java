@@ -58,7 +58,7 @@ public class MedicoController {
 		return ResponseEntity.ok(new DadosDetalhamentoMedico(medico)); // cria um DTO para devolver todas as informações do médico atualizado
 	}
 	
-	@DeleteMapping("/{id}") // parametro dinamico, pode variar
+	@DeleteMapping("/{id}") // parametro dinamico, pode variar, vindo da URL
 	@Transactional
 	public ResponseEntity excluir(@PathVariable Long id) { // variavel do caminho, da URL, apenas inativa usuário
 		var medico = repository.getReferenceById(id);

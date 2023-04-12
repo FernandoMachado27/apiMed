@@ -6,7 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,7 +44,7 @@ public class PacienteController {
 	
 	@GetMapping
 	public ResponseEntity <Page<DadosListagemPaciente>> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao){
-		var page = repository.findAll(paginacao).map(DadosListagemPaciente::new);
+		var page = repository.findAllByAtivoTrue(paginacao).map(DadosListagemPaciente::new);
 		
 		return ResponseEntity.ok(page);
 	}
@@ -54,6 +56,15 @@ public class PacienteController {
 		paciente.atualizarDados(dados);
 		
 		return ResponseEntity.ok(new DadosDetalhamentoPaciente(paciente));
+	}
+	
+	@DeleteMapping("/{id}")
+	@Transactional
+	public ResponseEntity excluir(@PathVariable Long id) {
+		var paciente = repository.getReferenceById(id);
+		paciente.excuir();
+		
+		return ResponseEntity.noContent().build();
 	}
 
 }
