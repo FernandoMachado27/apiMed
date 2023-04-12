@@ -66,5 +66,12 @@ public class MedicoController {
 		
 		return ResponseEntity.noContent().build(); // retorna 204 sem corpo
 	}
+	
+	@GetMapping("/{id}") 
+	public ResponseEntity detalhar(@PathVariable Long id) {  // buscar um medico pelo id
+		var medico = repository.getReferenceById(id);
+		
+		return ResponseEntity.ok(new DadosDetalhamentoMedico(medico)); 
+	}
 
 }
