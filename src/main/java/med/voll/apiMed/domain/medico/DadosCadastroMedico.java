@@ -8,19 +8,19 @@ import jakarta.validation.constraints.Pattern;
 import med.voll.apiMed.domain.endereco.DadosEndereco;
 
 public record DadosCadastroMedico(
-		@NotBlank // verifica se não é nulo nem vazio, NotBlank é só para Strings
+		@NotBlank(message = "Nome é obrigatório") // verifica se não é nulo nem vazio, NotBlank é só para Strings
 		String nome, 
-		@NotBlank 
-		@Email
+		@NotBlank(message = "Email é obrigatório")
+		@Email (message = "Formato do email é inválido")
 		String email, 
-		@NotBlank
+		@NotBlank(message = "Telefone é obrigatório")
 		String telefone,
-		@NotBlank
-		@Pattern(regexp = "\\d{4,6}") // expressão regular de 4 a 6 digitos
+		@NotBlank(message = "CRM é obrigatório")
+		@Pattern(regexp = "\\d{4,6}", message = "Formato do CRM é inválido") // expressão regular de 4 a 6 digitos
 		String crm, 
-		@NotNull
+		@NotNull(message = "Especialidade é obrigatória")
 		Especialidade especialidade,
-		@NotNull
+		@NotNull(message = "Dados do endereço são obrigatórios")
 		@Valid // também validar dentro da classe abaixo
 		DadosEndereco endereco) { // DTO, model, transfere dados entre camadas, recebe e devolve(GET/SET)
 
