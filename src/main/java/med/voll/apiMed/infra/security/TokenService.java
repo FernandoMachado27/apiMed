@@ -3,6 +3,8 @@ package med.voll.apiMed.infra.security;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.auth0.jwt.JWT;
@@ -14,9 +16,12 @@ import med.voll.apiMed.domain.usuario.Usuario;
 @Service // spring starta automaticamente
 public class TokenService {
 	
+	@Value("{api.security.token.secret}") //pega a variavel do application.properties
+	private String secret;
+	
 	public String gerarToken(Usuario usuario) {
 		try {
-		    var algoritmo = Algorithm.HMAC256("12345678"); // algoritmo que faz assinatura digital, passando senha da API
+		    var algoritmo = Algorithm.HMAC256(secret); // algoritmo que faz assinatura digital, passando senha da API
 		    return JWT.create()
 		        .withIssuer("API Voll.med") // quem gera esse token
 		        .withSubject(usuario.getLogin()) // pessoa relacionada a este token
