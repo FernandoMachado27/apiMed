@@ -15,7 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity // vamos personalizar config de segurança
 public class SecurityConfigurations {
 	
-	@Bean // devolve obj p/ spring, ensina ele a como criar um obj que vou injetar em algum lugar, ou que ele usa internamente
+	@Bean // devolve obj p/ spring, ensina ele a como criar um obj que posso injetar em algum lugar, ou que ele usa internamente
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http.csrf().disable() // desabilitar ataque csrf pois o token já protege
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -23,7 +23,7 @@ public class SecurityConfigurations {
 	}
 	
 	@Bean
-	public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception { // classe que sabe criar obj authenticationManager
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception { // classe que sabe criar obj authenticationManager, para usar o AutenticacaoService
 		return configuration.getAuthenticationManager();
 	}
 	

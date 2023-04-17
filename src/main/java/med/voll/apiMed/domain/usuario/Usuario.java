@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Builder
-public class Usuario implements UserDetails{ // necessario implementar por conta do Spring Securitypara dizer o que é login e o que é senha
+public class Usuario implements UserDetails{ // necessario implementar por conta do Spring Security para dizer o que é login e o que é senha
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
