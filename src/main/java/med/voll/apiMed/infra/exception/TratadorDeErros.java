@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import jakarta.persistence.EntityNotFoundException;
 
 @RestControllerAdvice
-public class TratadorDeErros { // classe que isola o tratamento de exceções da API
+public class TratadorDeErros { // classe que isola o tratamento de exceções da API, spring chama automaticamente sempre que acontece uma exception
 
 	@ExceptionHandler(EntityNotFoundException.class) // onde for lançada esta exception
 	public ResponseEntity tratarErro404() {
