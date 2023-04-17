@@ -24,7 +24,7 @@ public class AutenticacaoController {
 		var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha()); // tem que passar pelo proprio DTO do Spring
 		var autentication = manager.authenticate(token); // Spring encontra a classe AutenticacaoService, chama o metodo que usa o repository, fazendo a consulta no BD
 		
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok();
 	}
 
 }
