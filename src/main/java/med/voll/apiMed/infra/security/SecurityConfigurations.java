@@ -2,6 +2,7 @@ package med.voll.apiMed.infra.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,6 +20,9 @@ public class SecurityConfigurations {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http.csrf().disable() // desabilitar ataque csrf pois o token já protege
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.and().authorizeHttpRequests() 
+				.requestMatchers(HttpMethod.POST, "/login").permitAll()// libere requisição de login
+				.anyRequest().authenticated() // as outras requisições é para barrar
 				.and().build(); // desabilita autenticação do form, e a autenticação seja Stateless por ser REST
 	}
 	
