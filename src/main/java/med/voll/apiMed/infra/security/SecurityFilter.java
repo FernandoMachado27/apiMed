@@ -30,8 +30,8 @@ public class SecurityFilter extends OncePerRequestFilter{ // classe que implemen
 		var tokenJWT = recuperarToken(request); // recupero token do cabeçalho
 		
 		if (tokenJWT != null) { // se tem token no cabeçalho, faço a validação
-			var subject = tokenService.getSubject(tokenJWT);
-			var usuario = repository.findByLogin(subject); 
+			var subject = tokenService.getSubject(tokenJWT); // verifica se o token esta valido
+			var usuario = repository.findByLogin(subject); // recupera o usuario atraves do token
 			
 			var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities()); // como se fosse um DTO do spring que representa um usuario logado
 			SecurityContextHolder.getContext().setAuthentication(authentication); // spring considere que o usuario está logado

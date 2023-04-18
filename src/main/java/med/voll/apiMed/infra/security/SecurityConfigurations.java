@@ -1,5 +1,6 @@
 package med.voll.apiMed.infra.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -11,10 +12,14 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration // classe de configuração
 @EnableWebSecurity // vamos personalizar config de segurança
 public class SecurityConfigurations {
+	
+	@Autowired
+	private SecurityFilter securityFilter;
 	
 	@Bean // devolve obj p/ spring, ensina ele a como criar um obj que posso injetar em algum lugar, ou que ele usa internamente
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -23,7 +28,8 @@ public class SecurityConfigurations {
 				.and().authorizeHttpRequests() 
 				.requestMatchers(HttpMethod.POST, "/login").permitAll()// libere requisição de login
 				.anyRequest().authenticated() // as outras requisições é para barrar
-				.and().build(); // desabilita autenticação do form, e a autenticação seja Stateless por ser REST
+				.and().addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class) // diz ao Spring qual filtro vem primeiro(a minha antes que a do Spring
+				.build(); // desabilita autenticação do form, e a autenticação seja Stateless por ser REST
 	}
 	
 	@Bean
