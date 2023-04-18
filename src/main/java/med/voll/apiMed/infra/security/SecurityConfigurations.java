@@ -39,7 +39,7 @@ public class SecurityConfigurations {
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder(); // ensina ao eclipse que é para usar este algoritmo de senha
+		return new BCryptPasswordEncoder(); // ensina ao eclipse que é para usar este algoritmo de senha, o BCrypt
 	}
 
 }
