@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import med.voll.apiMed.controller.DadosAgendamentoConsulta;
+import med.voll.apiMed.controller.DadosDetalhamentoConsulta;
 import med.voll.apiMed.domain.ValidacaoException;
 import med.voll.apiMed.domain.consulta.validacoes.ValidadorAgendamentoDeConsulta;
 import med.voll.apiMed.domain.medico.Medico;
@@ -27,7 +28,7 @@ public class AgendaDeConsultas {
 	@Autowired
 	private List<ValidadorAgendamentoDeConsulta> validadores; // pega todos os validadores que implementa a interface
 	
-	public void agendar(DadosAgendamentoConsulta dados) {
+	public DadosDetalhamentoConsulta agendar(DadosAgendamentoConsulta dados) {
 		if (!pacienteRepository.existsById(dados.idPaciente())) {
 			throw new ValidacaoException("Id do paciente não existe!");
 		}
@@ -42,6 +43,8 @@ public class AgendaDeConsultas {
 		var medico = escolherMedico(dados);
 		var consulta = new Consulta(null, medico, paciente, dados.data());
 		consultaRepository.save(consulta);
+		
+		return new DadosDetalhamentoConsulta(consulta);
 	}
 
 	private Medico escolherMedico(DadosAgendamentoConsulta dados) {
