@@ -3,10 +3,13 @@ package med.voll.apiMed.domain.consulta.validacoes;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+import org.springframework.stereotype.Component;
+
 import med.voll.apiMed.controller.DadosAgendamentoConsulta;
 import med.voll.apiMed.domain.ValidacaoException;
 
-public class ValidadorHorarioAntecedencia {
+@Component
+public class ValidadorHorarioAntecedencia implements ValidadorAgendamentoDeConsulta{
 
 	public void validar(DadosAgendamentoConsulta dados) {
 		var dataConsulta = dados.data();
