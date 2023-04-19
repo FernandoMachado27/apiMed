@@ -21,11 +21,19 @@ public interface MedicoRepository extends JpaRepository<Medico, Long>{ // a clas
 			m.id not in(
 				select c.medico from Consulta c
 				where
-				c.data = :date
+				c.data = :data
 			)
 			order by rand()
 			limit 1
 			""") // Traz todos os medicos ativos que sejam dessa especialidade e me retorna 1 aleatório com a data vazia
 	Medico escolherMedicoAleatorioLivreNaData(Especialidade especialidade, LocalDateTime data); // nós que fazemos a consulta
+	
+	@Query("""
+			select m.ativo
+			from Medico m
+			where
+			m.id = :id
+			""")
+	Boolean findAtivoById(Long id); // só o atributo ativo do medico deste ID
 
 }

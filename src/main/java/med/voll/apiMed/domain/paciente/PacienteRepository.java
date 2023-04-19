@@ -8,4 +8,6 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long>{
 
 	Page<Paciente> findAllByAtivoTrue(Pageable paginacao);
 
+	boolean findAtivoById(Long idPaciente);
+
 }
