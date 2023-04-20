@@ -41,6 +41,11 @@ public class AgendaDeConsultas {
 		
 		var paciente = pacienteRepository.getReferenceById(dados.idPaciente()); 
 		var medico = escolherMedico(dados);
+		
+		if (medico == null) {
+			throw new ValidacaoException("Não existe médico disponível nesta data");
+		}
+		
 		var consulta = new Consulta(null, medico, paciente, dados.data());
 		consultaRepository.save(consulta);
 		
