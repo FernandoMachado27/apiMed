@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import jakarta.persistence.EntityNotFoundException;
+import med.voll.apiMed.domain.ValidacaoException;
 
 @RestControllerAdvice
 public class TratadorDeErros { // classe que isola o tratamento de exceções da API, spring chama automaticamente sempre que acontece uma exception
@@ -52,6 +53,11 @@ public class TratadorDeErros { // classe que isola o tratamento de exceções da
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity tratarErro500(Exception ex) {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro: " + ex.getLocalizedMessage());
+	}
+	
+	@ExceptionHandler(ValidacaoException.class)
+	public ResponseEntity tratarErroRegraDeNegocio(ValidacaoException ex) {
+		return ResponseEntity.badRequest().body(ex.getMessage());
 	}
 	
 	private record DadosErroValidacao(String campo, String mensagem) { // DTO dentro da classe, só vai ser usada aqui
