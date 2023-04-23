@@ -27,6 +27,7 @@ public class SecurityConfigurations {
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and().authorizeHttpRequests() 
 				.requestMatchers(HttpMethod.POST, "/login").permitAll()// libere requisição de login
+				.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll() // endereços publicos para gerar doc do SpringDoc
 				.anyRequest().authenticated() // as outras requisições é para barrar
 				.and().addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class) // diz ao Spring qual filtro vem primeiro(a minha antes que a do Spring
 				.build(); // desabilita autenticação do form, e a autenticação seja Stateless por ser REST
