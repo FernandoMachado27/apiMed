@@ -23,7 +23,7 @@ import med.voll.apiMed.domain.paciente.Paciente;
 @DataJpaTest // utilizada para testar uma interface repository
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) // não substituiir meu bd pelo que está em memória
 @ActiveProfiles("test") // para ler aplication-test
-class MedicoRepositoryTest {
+class MedicoRepositoryTest { // testes realizados com banco de dados distinto
 	
 	@Autowired
 	private MedicoRepository medicoRepository;
