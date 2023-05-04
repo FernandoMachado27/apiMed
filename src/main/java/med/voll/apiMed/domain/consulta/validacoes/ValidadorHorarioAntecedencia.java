@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Component;
 
-import med.voll.apiMed.controller.DadosAgendamentoConsulta;
 import med.voll.apiMed.domain.ValidacaoException;
+import med.voll.apiMed.domain.consulta.DadosAgendamentoConsulta;
 
 @Component
 public class ValidadorHorarioAntecedencia implements ValidadorAgendamentoDeConsulta{

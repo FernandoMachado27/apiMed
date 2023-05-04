@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import med.voll.apiMed.controller.DadosAgendamentoConsulta;
-import med.voll.apiMed.controller.DadosDetalhamentoConsulta;
 import med.voll.apiMed.domain.ValidacaoException;
 import med.voll.apiMed.domain.consulta.validacoes.ValidadorAgendamentoDeConsulta;
 import med.voll.apiMed.domain.medico.Medico;

@@ -22,6 +22,8 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import med.voll.apiMed.domain.consulta.AgendaDeConsultas;
+import med.voll.apiMed.domain.consulta.DadosAgendamentoConsulta;
+import med.voll.apiMed.domain.consulta.DadosDetalhamentoConsulta;
 import med.voll.apiMed.domain.medico.Especialidade;
 
 @SpringBootTest // para fazer a simulação da classe controller

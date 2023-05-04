@@ -1,4 +1,4 @@
-package med.voll.apiMed.controller;
+package med.voll.apiMed.domain.consulta;
 
 import java.time.LocalDateTime;
 

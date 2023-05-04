@@ -1,8 +1,6 @@
-package med.voll.apiMed.controller;
+package med.voll.apiMed.domain.consulta;
 
 import java.time.LocalDateTime;
-
-import med.voll.apiMed.domain.consulta.Consulta;
 
 public record DadosDetalhamentoConsulta(Long id, Long idMedico, Long idPaciente, LocalDateTime data) {
 

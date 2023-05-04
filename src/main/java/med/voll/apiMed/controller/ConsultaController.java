@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import med.voll.apiMed.domain.consulta.AgendaDeConsultas;
 import med.voll.apiMed.domain.consulta.ConsultaRepository;
+import med.voll.apiMed.domain.consulta.DadosAgendamentoConsulta;
 
 @RestController
 @RequestMapping("/consultas")
